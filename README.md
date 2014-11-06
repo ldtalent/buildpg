@@ -91,6 +91,6 @@ Prerequisites:
     }
     ```
 
-7. We recommend using jQuery Mobile.
+7. We recommend using jQuery Mobile and this implementation of Fast Buttons http://stackoverflow.com/questions/13477328/speed-fix-how-to-remove-the-300ms-delay-in-jquery-mobile-apps
 
 8. As you develop, test each feature you add both on web and on mobile at the same time.
