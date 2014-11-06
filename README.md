@@ -1,7 +1,7 @@
 buildpg
 =======
 
-compiles a django website into a phonegap app
+Compiles a Django website into a PhoneGap app
 
 Up until now it has been impossible to develop once and get both fantastic SEO for your content rich site and a fast HTML5 app that isn't just a webview (note, Apple does not like webviews). 
 
