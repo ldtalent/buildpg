@@ -86,7 +86,7 @@ Prerequisites:
 
     ```javascript
     function pgget(url, data, success, dataType) { // define a get request that removes the slash from /static gets, http://api.jquery.com/jquery.get/
-        if (url.substring(0, 7) == '/static') url = '`file:///android_asset/www/`' + url.substring(1);
+        if (url.substring(0, 7) == '/static') url = 'file:///android_asset/www/' + url.substring(1);
         $.get(url, data, success, dataType);
     }
     ```
