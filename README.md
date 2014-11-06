@@ -92,3 +92,5 @@ Prerequisites:
     ```
 
 7. We recommend using jQuery Mobile.
+
+8. As you develop, test each feature you add both on web and on mobile at the same time.
