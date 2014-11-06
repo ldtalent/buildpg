@@ -70,7 +70,7 @@ Prerequisites:
                 - js
                 - compiled-partials
 
-5. All static files and all .jade files should have unique base names.
+5. All static files and all jade files should have unique base names.
 
 6. A quick under-the-hood:
     
