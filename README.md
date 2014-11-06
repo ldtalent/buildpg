@@ -10,68 +10,79 @@ Introducing buildpg...
 [WARNING: THIS PROJECT IS STILL SPECIFIC TO THE LEARNING DOLLARS IMPLEMENTATION. WE WILL BE MAKING IT GENERALIZABLE SHORTLY. IN THE MEANTIME, FEEL FREE TO TWEAK TO SUIT YOUR PROJECT. ALSO WE ARE WORKING ON THE "TEMPORARILY" PART (6.a.i)]
 
 Prerequisites:
+
 1. You must use Django.
-2. You must use Pyjade but recognize that Django and Pyjade template logic and template variables will be omitted from the PhoneGap version so you must compensate with Javascript. You should structure your Javascript pages as follows:
 
-    function isPhoneGap() {
-        return document.URL.indexOf('http://') === -1 && document.URL.indexOf('https://') === -1;
-    }
+2. You must use Pyjade but recognize that Django and Pyjade template logic and template variables will be omitted from the PhoneGap version so you must compensate with Javascript (and api calls). You should structure your Javascript pages as follows:
+    
+```javascript
+function isPhoneGap() {
+    return document.URL.indexOf('http://') === -1 && document.URL.indexOf('https://') === -1;
+}
 
-    if (isPhoneGap()) {
-        // fill in all template variables
-        // handle all template logic
-    }
+if (isPhoneGap()) {
+    // fill in all template variables
+    // handle all template logic
+}
 
-    // rest of js code
+// rest of js code
+```
 
 3. You must have jade installed (install nodejs and then npm install jade -g [sudo if necessary])
+
 4. We expect a layout like:
 
-- YOUR_DJANGO_PROJECT
-    - templates
-        - template_that_i_want_compiled-1.jade
-        - template_that_i_want_compiled-2.jade
-        - partials
-            - head.jade
-            - partial_that_i_want_included_in_templates-1.jade
-            - partial_that_i_want_included_in_templates-2.jade
-    - static
-        - css
-        - img
-        - js
-        - compiled-partials
-    - YOUR_APP_1
+    - YOUR_DJANGO_PROJECT
         - templates
-            - template_that_i_want_compiled-3.jade
-            - template_that_i_want_compiled-4.jade
+            - template_that_i_want_compiled-1.jade
+            - template_that_i_want_compiled-2.jade
             - partials
-                - partial_that_i_want_included_in_templates-5.jade
-                - partial_that_i_want_included_in_templates-6.jade
+                - head.jade
+                - partial_that_i_want_included_in_templates-1.jade
+                - partial_that_i_want_included_in_templates-2.jade
         - static
             - css
             - img
             - js
             - compiled-partials
-    - YOUR_APP_2
-        - templates
-            - template_that_i_want_compiled-7.jade
-            - template_that_i_want_compiled-8.jade
-            - partials
-                - partial_that_i_want_included_in_templates-9.jade
-                - partial_that_i_want_included_in_templates-10.jade
-        - static
-            - css
-            - img
-            - js
-            - compiled-partials
+        - YOUR_APP_1
+            - templates
+                - template_that_i_want_compiled-3.jade
+                - template_that_i_want_compiled-4.jade
+                - partials
+                    - partial_that_i_want_included_in_templates-5.jade
+                    - partial_that_i_want_included_in_templates-6.jade
+            - static
+                - css
+                - img
+                - js
+                - compiled-partials
+        - YOUR_APP_2
+            - templates
+                - template_that_i_want_compiled-7.jade
+                - template_that_i_want_compiled-8.jade
+                - partials
+                    - partial_that_i_want_included_in_templates-9.jade
+                    - partial_that_i_want_included_in_templates-10.jade
+            - static
+                - css
+                - img
+                - js
+                - compiled-partials
 
 5. All static files and all .jade files should have unique base names.
+
 6. A quick under-the-hood:
     a. We copy over static files from YOUR_DJANGO_PROJECT/static and from the static directories of each member of YOUR_DJANGO_APPS into YOUR_PHONEGAP_APP/www/static.
+    
     b. Using the jade compiler (not the pyjade compiler), we compile all the templates that sit directly in YOUR_DJANGO_PROJECTS/templates and in the templates directories of each member of YOUR_DJANGO_APPS. We put these compiled html files in YOUR_PHONEGAP_APP/www (be careful to not have any file called index.jade)
+        
         i. We do temporarily make a copy of your templates in YOUR_PHONEGAP_APP in order to remove pyjade template logic.
+    
     b. We compile your head.jade file into the index.html file of the PhoneGap app (this should have all the script includes and the css links).
+    
     c. We make static file imports relative (change "/static" to "static") and remove Django template logic for files in a YOUR_PHONEGAP_APP/www/static/js, YOUR_PHONEGAP_APP/www/static/css, or YOUR_PHONEGAP_APP/static/compiled-partials directory, as well as for html files in YOUR_PHONEGAP_APP/www. (We expect all your javascript static file requests will be of the form $.get('/static/...', callback))
+    
     d. We expect the following function to sit in the index.js autocreated by phonegap:
 
         function pgget(url, data, success, dataType) { // define a get request that removes the slash from /static gets, http://api.jquery.com/jquery.get/
