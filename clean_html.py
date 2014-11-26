@@ -81,7 +81,7 @@ head = '<head>' + f.read() + '<style>.ui-btn.ui-btn-active:hover { background-co
 head = re.sub(r'src="(.*?)jquery.min.js"', 'src="static/js/jquery.min.js"', head)
 head = re.sub(r'src="(.*?)jquery.mobile.min.js"', 'src="static/js/jquery.mobile.min.js"', head)
 #print head
-body = '<body><span id="fastclick"><div class="app"><div id="deviceready" class="blink"><div data-role="page" ldid="startPage"><script type="text/javascript" src="cordova.js"></script><script type="text/javascript" src="js/index.js"></script><script type="text/javascript">app.initialize();</script></div></div></div><div id="page_specific_files"></div></span></body>'
+body = '<body><span id="fastclick"><div class="app"><div id="deviceready" class="blink"><div data-role="page"><script type="text/javascript" src="cordova.js"></script><script type="text/javascript" src="js/index.js"></script><script type="text/javascript">app.initialize();</script></div></div></div><div id="page_specific_files"></div></span></body>'
 html = '<html>' + head + body + '</html>'
 f = open('ldmobile/www/index.html', 'w')
 f.write(html)
